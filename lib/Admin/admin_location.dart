@@ -38,17 +38,25 @@ class _MapPageState extends State<MapPage> {
 
   final MapController _mapController = MapController(); // Added MapController
 
+  bool isRouteStarted = false; // Flag to control route start
+
   @override
   void initState() {
     super.initState();
     currentPosition = polygonPoints[0];
-    _startMovementTimer();
   }
 
   @override
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  void _startRoute() {
+    setState(() {
+      isRouteStarted = true; // Route started, hide the button
+    });
+    _startMovementTimer();
   }
 
   void _startMovementTimer() {
@@ -153,85 +161,111 @@ class _MapPageState extends State<MapPage> {
       appBar: AppBar(
         title: Text('Collection Route'),
       ),
-      body: Stack(
+      body: Column(
         children: [
-          FlutterMap(
-            mapController: _mapController, // Added MapController
-            options: MapOptions(
-              // The initial center and zoom should be set here
-              initialCenter: LatLng(27.699748118746737,
-                  85.29397472007343), // Initial center of the map
-              initialZoom: 15.0, // Zoom level
+          Expanded(
+            child: Stack(
+              children: [
+                FlutterMap(
+                  mapController: _mapController, // Added MapController
+                  options: MapOptions(
+                    initialCenter:
+                        LatLng(27.699748118746737, 85.29397472007343),
+                    initialZoom: 15.0,
+                  ),
+                  children: [
+                    TileLayer(
+                      urlTemplate:
+                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      userAgentPackageName: 'com.example.app',
+                    ),
+                    PolygonLayer(
+                      polygons: [
+                        Polygon(
+                          points: polygonPoints,
+                          color: Colors.blue.withOpacity(0.3),
+                          borderColor: Colors.blue,
+                          borderStrokeWidth: 2,
+                        ),
+                      ],
+                    ),
+                    MarkerLayer(
+                      markers: [
+                        ...List.generate(
+                          polygonPoints.length,
+                          (index) => Marker(
+                            point: polygonPoints[index],
+                            width: 30,
+                            height: 30,
+                            child: Icon(
+                              Icons.location_on,
+                              color: markerColors[index],
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                        Marker(
+                          point: currentPosition,
+                          width: 40,
+                          height: 40,
+                          child: Transform.rotate(
+                            angle: _calculateRotationAngle(),
+                            child: Icon(
+                              Icons.local_shipping,
+                              color: isWaiting ? Colors.red : Colors.black,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                if (isWaiting && !routeCompleted)
+                  Positioned(
+                    top: 20,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 4,
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          'Collecting at stop ${currentSegmentIndex + 1}...',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
-            children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.app',
-              ),
-              PolygonLayer(
-                polygons: [
-                  Polygon(
-                    points: polygonPoints,
-                    color: Colors.blue.withOpacity(0.3),
-                    borderColor: Colors.blue,
-                    borderStrokeWidth: 2,
-                  ),
-                ],
-              ),
-              MarkerLayer(
-                markers: [
-                  ...List.generate(
-                    polygonPoints.length,
-                    (index) => Marker(
-                      point: polygonPoints[index],
-                      width: 30,
-                      height: 30,
-                      child: Icon(
-                        Icons.location_on,
-                        color: markerColors[index],
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                  Marker(
-                    point: currentPosition,
-                    width: 40,
-                    height: 40,
-                    child: Transform.rotate(
-                      angle: _calculateRotationAngle(),
-                      child: Icon(
-                        Icons.local_shipping,
-                        color: isWaiting ? Colors.red : Colors.black,
-                        size: 40,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
           ),
-          if (isWaiting && !routeCompleted)
-            Positioned(
-              top: 20,
-              left: 0,
-              right: 0,
-              child: Center(
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
+          if (!isRouteStarted)
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                onPressed: _startRoute,
+                child: Text(
+                  'Start Route',
+                  style: TextStyle(fontSize: 18),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 4,
-                      ),
-                    ],
                   ),
-                  child: Text(
-                    'Collecting at stop ${currentSegmentIndex + 1}...',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
+                  fixedSize: Size(double.infinity, 50),
                 ),
               ),
             ),
@@ -240,7 +274,6 @@ class _MapPageState extends State<MapPage> {
     );
   }
 
-  // Updated to use the current launch method
   void _launchURL() async {
     final Uri url = Uri.parse('https://openstreetmap.org/copyright');
     if (await canLaunchUrl(url)) {

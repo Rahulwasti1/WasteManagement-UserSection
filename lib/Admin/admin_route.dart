@@ -11,7 +11,7 @@ class admin_route extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Bus Schedule App',
+      title: 'Kalimati Distribution',
       home: const BusScheduleScreen(),
     );
   }
@@ -40,7 +40,8 @@ class BusScheduleScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            buildBusScheduleCard("Environment management department", "3 mins", "completed"),
+            buildBusScheduleCard(
+                "Environment management department", "3 mins", "completed"),
             const SizedBox(height: 8),
             buildBusScheduleCard("Kalimati Chowk", "5 mins", "in_transit"),
             const SizedBox(height: 8),

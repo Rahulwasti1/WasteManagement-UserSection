@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'admin_home.dart';
 import 'admin_location.dart';
-import 'admin_profile.dart'; 
+import 'admin_profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const AdminNavigation(),
+      home: const MyApp(),
     );
   }
 }
@@ -40,10 +38,9 @@ class _AdminNavigationState extends State<AdminNavigation> {
   ];
 
   final List<Widget> _screens = [
-    const admin_home(),
+    const AdminNavigation(),
     MapPage(),
     const admin_profile(), // Make sure this screen is created
-
   ];
 
   int _selectedIndex = 0;
