@@ -1,3 +1,16 @@
+buildscript {
+    repositories {
+        google()  // Ensures you can access Google's Maven repository for dependencies
+        mavenCentral()  // Allows access to Maven Central repository
+    }
+    dependencies {
+        // Update this to the latest AGP compatible with Gradle 8.x
+        classpath 'com.android.tools.build:gradle:8.0.2'
+        // AGP version 8.0.0 is compatible with Gradle 8.3
+    }
+}
+
+
 allprojects {
     repositories {
         google()

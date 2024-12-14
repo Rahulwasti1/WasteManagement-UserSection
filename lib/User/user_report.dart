@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 
-class user_report extends StatefulWidget {
-  const user_report({super.key});
+class UserReport extends StatefulWidget {
+  const UserReport({super.key});
 
   @override
-  State<user_report> createState() => _user_reportState();
+  State<UserReport> createState() => _UserHomeState();
 }
 
-class _user_reportState extends State<user_report> {
+class _UserHomeState extends State<UserReport> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('User Profile'),
+        actions: [
+          // You can add actions here if needed
+        ],
+      ),
+      body: Center(
+        child: Text('Welcome to User Home!'),
+      ),
+    );
   }
 }

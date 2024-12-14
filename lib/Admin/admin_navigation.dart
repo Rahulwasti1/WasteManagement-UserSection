@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'admin_home.dart';
-import 'admin_profile.dart';
-import 'admin_route.dart'; // Assuming you have this screen
+import 'admin_location.dart';
+import 'admin_profile.dart'; 
 
 void main() {
   runApp(const MyApp());
@@ -35,15 +35,13 @@ class AdminNavigation extends StatefulWidget {
 class _AdminNavigationState extends State<AdminNavigation> {
   final List<String> _titles = [
     "Admin Dashboard",
-    "Manage Drivers",
-    "Schedule Collection",
-    "Add Location",
-    "Profile"
+    "Route",
+    "Profile",
   ];
 
   final List<Widget> _screens = [
     const admin_home(),
-    const admin_route(),
+    MapPage(),
     const admin_profile(), // Make sure this screen is created
 
   ];
@@ -89,12 +87,12 @@ class _AdminNavigationState extends State<AdminNavigation> {
               label: 'Home',
             ),
             NavigationDestination(
-              icon: const Icon(Icons.directions_car, color: Colors.white),
+              icon: const Icon(Icons.route, color: Colors.white),
               label: 'Driver',
             ),
             NavigationDestination(
-              icon: const Icon(Icons.calendar_today, color: Colors.white),
-              label: 'Schedule',
+              icon: const Icon(Icons.person, color: Colors.white),
+              label: 'Profile',
             ),
           ],
         ),
