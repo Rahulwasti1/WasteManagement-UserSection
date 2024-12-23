@@ -20,7 +20,7 @@ class _UserHomeState extends State<UserHome> {
             const CircleAvatar(
               radius: 20,
               backgroundImage: AssetImage(
-                  'assets/profile_image.png'), // Replace with your asset
+                  'assets/icons/rahul.png'), // Replace with your asset
             ),
             const SizedBox(width: 10),
             Column(
@@ -84,7 +84,6 @@ class _UserHomeState extends State<UserHome> {
                   borderRadius: BorderRadius.circular(12),
                   color: const Color(0xFFE8F5E9),
                 ),
-                
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
@@ -122,7 +121,7 @@ class _UserHomeState extends State<UserHome> {
                   color: Colors.grey.shade300,
                 ),
                 child: const Center(
-                  child: Text('Map Placeholder'),
+                  child: Text('No active maps!'),
                 ),
               ),
               const SizedBox(height: 20),

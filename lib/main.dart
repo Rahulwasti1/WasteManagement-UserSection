@@ -1,4 +1,4 @@
-import 'package:ecomitra_frontend/Admin/admin_location.dart';
+import 'package:ecomitra_frontend/Login_Signup/Login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // Set AdminNavigation as the home screen
-      home: MapPage(),
+      debugShowCheckedModeBanner: false,
+      home: Login(),
     );
   }
 }

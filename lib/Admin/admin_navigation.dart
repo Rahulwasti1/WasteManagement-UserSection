@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyApp(),
+      home: const AdminNavigation(), // Set the home to AdminNavigation here
     );
   }
 }
@@ -39,7 +39,7 @@ class _AdminNavigationState extends State<AdminNavigation> {
 
   final List<Widget> _screens = [
     const AdminNavigation(),
-    MapPage(),
+    MapPage(), // You need to create this MapPage widget
     const admin_profile(), // Make sure this screen is created
   ];
 

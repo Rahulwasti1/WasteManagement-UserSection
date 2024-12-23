@@ -2,7 +2,7 @@ import 'package:ecomitra_frontend/User/user_home.dart';
 import 'package:ecomitra_frontend/User/user_news.dart';
 import 'package:ecomitra_frontend/User/user_profile.dart';
 import 'package:ecomitra_frontend/User/user_report.dart';
-import 'package:ecomitra_frontend/User/user_scanner.dart';
+import 'package:ecomitra_frontend/User/user_route.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -38,7 +38,6 @@ class _UserNavigationState extends State<UserNavigation> {
     "Dashboard",
     "News Highlights", // Fixed missing comma
     "Route",
-    "Scanner",
     "Report",
     "Profile",
   ];
@@ -46,8 +45,8 @@ class _UserNavigationState extends State<UserNavigation> {
   final List<Widget> _screens = [
     const UserHome(),
     const UserNews(),
-    const UserReport(), // Added const
-    const UserScanner(),
+    UserRoute(),
+    const ReportPage(), // Added const
     const UserProfile(),
   ];
 
@@ -103,10 +102,10 @@ class _UserNavigationState extends State<UserNavigation> {
               icon: const Icon(Icons.route, color: Colors.white),
               label: 'Route',
             ),
-            NavigationDestination(
-              icon: const Icon(Icons.scanner, color: Colors.white),
-              label: 'Scanner',
-            ),
+            // NavigationDestination(
+            //   icon: const Icon(Icons.scanner, color: Colors.white),
+            //   label: 'Scanner',
+
             NavigationDestination(
               icon: const Icon(Icons.report, color: Colors.white),
               label: 'Report',

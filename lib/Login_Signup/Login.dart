@@ -1,8 +1,6 @@
-import 'package:ecomitra_frontend/Login_Signup/Signup.dart';
-import 'package:ecomitra_frontend/http/models/response_models.dart';
-import 'package:ecomitra_frontend/http/requests/auth_requests.dart';
-import 'package:flutter/material.dart';
-import "../http/models/request_models.dart";
+import 'package:ecomitra_frontend/Admin/admin_navigation.dart';
+import 'package:ecomitra_frontend/User/user_navigation.dart';
+import 'package:flutter/material.dart'; // Import your Admin homepage/ Import Signup page
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,27 +13,29 @@ class _LoginState extends State<Login> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  // Function to collect data
-  void collectData() async {
-    String email = emailController.text;
-    String password = passwordController.text;
-    String? accessToken, refreshToken, role;
+  // Function to handle login
+  void handleLogin() {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
 
-    // Simulate login data
-    LoginModel loginData = LoginModel(email: email, password: password);
-
-    // Perform login request
-    final LoginResponse? response = await loginReq(loginData);
-
-    if (response != null) {
-      accessToken = response.accessToken;
-      refreshToken = response.refreshToken;
-      role = response.user.role;
-      print('Access Token: $accessToken');
-      print('Refresh Token: $refreshToken');
-      print('Role: $role');
+    if (email.isEmpty || password.isEmpty) {
+      // Redirect to user_homepage if fields are empty
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const UserNavigation()),
+      );
+    } else if (email == "admin" && password == "admin") {
+      // Redirect to adminhome if credentials are admin/admin
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const AdminNavigation()),
+      );
     } else {
-      print('Login failed.');
+      // Redirect to user_homepage for all other cases
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const UserNavigation()),
+      );
     }
   }
 
@@ -48,57 +48,58 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 50),
+              const SizedBox(height: 10),
               // Back Button
-              ElevatedButton(
-                onPressed: () {
-                  print('Arrow Button Pressed');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.transparent, // Remove button background
-                  shadowColor: Colors.transparent, // Remove shadow
-                  padding: EdgeInsets.all(0), // Remove padding
-                  minimumSize: Size(0, 0), // Remove default size
-                  tapTargetSize:
-                      MaterialTapTargetSize.shrinkWrap, // Shrink touch target
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0), // No border radius
-                    side: BorderSide.none, // No border
-                  ),
-                ),
-                child:
-                    Image.asset("assets/icons/back.png", width: 16, height: 16),
-              ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     print('Arrow Button Pressed');
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Colors.transparent,
+              //     shadowColor: Colors.transparent,
+              //     padding: EdgeInsets.zero,
+              //     minimumSize: Size.zero,
+              //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(0),
+              //       side: BorderSide.none,
+              //     ),
+              //   ),
+              //   child: Image.asset(
+              //     "assets/icons/back.png",
+              //     width: 16,
+              //     height: 16,
+              //   ),
+              // ),
 
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
 
               // Avatar
               Center(
                 child: Image.asset(
-                  'assets/icons/man.png',
-                  height: 100,
-                  width: 100,
+                  'assets/icons/waste.png',
+                  height: 150,
+                  width: 150,
                 ),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Login Title and Subtitle
-              Text(
+              const Text(
                 "Login",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
-              SizedBox(height: 5),
-              Text(
+              const SizedBox(height: 5),
+              const Text(
                 "Login to continue using the app",
                 style: TextStyle(fontSize: 15, color: Colors.black54),
               ),
 
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
               // Email Input
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 8),
                 child: Text(
                   "Email",
@@ -106,9 +107,9 @@ class _LoginState extends State<Login> {
                 ),
               ),
 
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Padding(
-                padding: EdgeInsets.only(left: 8, right: 10),
+                padding: const EdgeInsets.only(left: 8, right: 10),
                 child: TextField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -116,16 +117,16 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(40),
                     ),
                     hintText: "Enter your email",
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16, vertical: 19),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 19),
                   ),
                 ),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Password Input
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 8),
                 child: Text(
                   "Password",
@@ -133,42 +134,44 @@ class _LoginState extends State<Login> {
                 ),
               ),
 
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
 
               Padding(
-                padding: EdgeInsets.only(left: 8, right: 10),
+                padding: const EdgeInsets.only(left: 8, right: 10),
                 child: TextField(
                   controller: passwordController,
+                  obscureText: true, // Hide password input
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
                     ),
                     hintText: "Enter Password",
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16, vertical: 19),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 19),
                   ),
                 ),
               ),
 
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
 
               // Forgot Password
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 240),
+                    padding: const EdgeInsets.only(left: 240),
                     child: Row(
                       children: [
                         Transform.translate(
-                          offset: Offset(0, -20),
+                          offset: const Offset(0, -20),
                           child: TextButton(
-                              onPressed: () {
-                                print("Button Clicked");
-                              },
-                              child: Text(
-                                "Forgot password?",
-                                style: TextStyle(color: Colors.black45),
-                              )),
+                            onPressed: () {
+                              print("Forgot Password Clicked");
+                            },
+                            child: const Text(
+                              "Forgot password?",
+                              style: TextStyle(color: Colors.black45),
+                            ),
+                          ),
                         )
                       ],
                     ),
@@ -179,22 +182,20 @@ class _LoginState extends State<Login> {
               Column(
                 children: [
                   Transform.translate(
-                    offset: Offset(0, -13),
+                    offset: const Offset(0, -13),
                     child: Center(
                       child: ElevatedButton(
-                        onPressed: () {
-                          collectData();
-                        },
+                        onPressed: handleLogin,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF00BF63),
-                          padding: EdgeInsets.symmetric(
+                          backgroundColor: const Color(0xFF00BF63),
+                          padding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 100),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
                           ),
-                          fixedSize: Size(360, 63),
+                          fixedSize: const Size(360, 63),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Login",
                           style: TextStyle(color: Colors.white, fontSize: 17),
                         ),
@@ -204,17 +205,17 @@ class _LoginState extends State<Login> {
                 ],
               ),
 
-              SizedBox(height: 9),
+              const SizedBox(height: 9),
 
               // Or Login with
-              Center(
+              const Center(
                 child: Text(
                   "⎯⎯⎯⎯⎯⎯⎯⎯   Or Login with   ⎯⎯⎯⎯⎯⎯⎯⎯",
                   style: TextStyle(fontSize: 14, color: Colors.black45),
                 ),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Social Media Buttons
               Row(
@@ -288,33 +289,35 @@ class _LoginState extends State<Login> {
                 ],
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               Center(
                 child: Column(
                   children: [
                     TextButton(
-                        onPressed: () {
-                          print("Register Clicked");
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => signup()));
-                        },
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "Don't have an account?",
-                                style: TextStyle(color: Colors.black45),
-                              ),
-                              TextSpan(
-                                text: " Register",
-                                style: TextStyle(color: Color(0xFF00BF63)),
-                              )
-                            ],
-                          ),
-                        ))
+                      onPressed: () {
+                        print("Register Clicked");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AdminNavigation()),
+                        );
+                      },
+                      child: RichText(
+                        text: const TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Don't have an account?",
+                              style: TextStyle(color: Colors.black45),
+                            ),
+                            TextSpan(
+                              text: " Register",
+                              style: TextStyle(color: Color(0xFF00BF63)),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )
