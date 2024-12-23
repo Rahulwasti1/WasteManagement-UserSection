@@ -1,4 +1,4 @@
-# ecomitra_frontend
+# WasteManagement Mobile App - Frontend
 
 A new Flutter project.
 
