@@ -1,6 +1,6 @@
 # WasteManagement Mobile App
 
----
+
 
 # Front-End Showcase
 
