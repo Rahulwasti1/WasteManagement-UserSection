@@ -1,30 +1,54 @@
-# WasteManagement Mobile App - Frontend
+# WasteManagement Mobile App
 
-A new Flutter project.
+---
 
-## Getting Started
+# Front-End Showcase
 
-This project is a starting point for a Flutter application.
+Welcome to the **Front-End Showcase**! Below you'll find screenshots of the interface to give you a visual overview of the mobile app.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Here are some screenshots showcasing different views of the mobile app design:
 
+### 1. **Homepage View**
 
+![Homepage Screenshot](https://github.com/user-attachments/assets/7fce5717-2156-496e-805b-c82c64dc5e1d)
 
-FrontEnd - Showcase:
+This is the homepage showcasing the main layout and structure.
 
-<img width="423" alt="Screenshot 2024-12-23 at 8 53 23 AM" src="https://github.com/user-attachments/assets/7fce5717-2156-496e-805b-c82c64dc5e1d" />
+---
 
-<img width="420" alt="Screenshot 2024-12-23 at 8 53 38 AM" src="https://github.com/user-attachments/assets/cd826d78-cd17-426a-9afa-d923148d5fbb" />
+### 2. **Navigation Section**
 
-<img width="423" alt="Screenshot 2024-12-23 at 8 53 55 AM" src="https://github.com/user-attachments/assets/d60bf17d-670e-4a38-8ea1-0c15d39bd147" />
+![Navigation Screenshot](https://github.com/user-attachments/assets/cd826d78-cd17-426a-9afa-d923148d5fbb)
 
-<img width="425" alt="Screenshot 2024-12-23 at 8 54 21 AM" src="https://github.com/user-attachments/assets/1a907150-8c02-4da1-818a-00b6dd293e6a" />
+This screenshot shows the navigation menu of the app.
 
-<img width="424" alt="Screenshot 2024-12-23 at 8 54 36 AM" src="https://github.com/user-attachments/assets/83399359-ec4b-4b11-8a77-d7dbf9e8fb49" />
+---
+
+### 3. **Main Content Area**
+
+![Main Content Area Screenshot](https://github.com/user-attachments/assets/d60bf17d-670e-4a38-8ea1-0c15d39bd147)
+
+This is the main content section where the core interactions happen.
+
+---
+
+### 4. **Footer Section**
+
+![Footer Section Screenshot](https://github.com/user-attachments/assets/1a907150-8c02-4da1-818a-00b6dd293e6a)
+
+Here's the footer section containing important links and information.
+
+---
+
+### 5. **Additional Features**
+
+![Additional Features Screenshot](https://github.com/user-attachments/assets/83399359-ec4b-4b11-8a77-d7dbf9e8fb49)
+
+This showcases some of the additional features and functionality integrated into the app.
+
+---
+
