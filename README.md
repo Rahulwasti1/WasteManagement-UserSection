@@ -20,35 +20,35 @@ This is the homepage showcasing the main layout and structure.
 
 ---
 
-### 2. **Navigation Section**
+### 2. **Navigation Map Alert Section**
 
 ![Navigation Screenshot](https://github.com/user-attachments/assets/cd826d78-cd17-426a-9afa-d923148d5fbb)
 
-This screenshot shows the navigation menu of the app.
+This screenshot shows the navigation map for waste vehicle route.
 
 ---
 
-### 3. **Main Content Area**
+### 3. **Report**
 
 ![Main Content Area Screenshot](https://github.com/user-attachments/assets/d60bf17d-670e-4a38-8ea1-0c15d39bd147)
 
-This is the main content section where the core interactions happen.
+This is the section where the users clicks picture of waste seen on road and then sends the report.
 
 ---
 
-### 4. **Footer Section**
+### 4. **Light Profile Mode**
 
 ![Footer Section Screenshot](https://github.com/user-attachments/assets/1a907150-8c02-4da1-818a-00b6dd293e6a)
 
-Here's the footer section containing important links and information.
+Here's the Light Mode of the mobile app containing important features.
 
 ---
 
-### 5. **Additional Features**
+### 5. **Dark Profile Mode**
 
 ![Additional Features Screenshot](https://github.com/user-attachments/assets/83399359-ec4b-4b11-8a77-d7dbf9e8fb49)
 
-This showcases some of the additional features and functionality integrated into the app.
+Here's the Dark Mode of the mobile app containing important features.
 
 ---
 
